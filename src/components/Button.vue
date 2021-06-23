@@ -7,16 +7,16 @@
 <script>
 export default {
 	name: 'Button',
-	props:['text', 'color'],
+	props:{
+		text : String, 
+		color : String
+		},
 
 	methods:
 	{
-		onClick() {
-			alert("Clicked")
+	onClick() {
+        this.$emit("showhide-task");	
 		}
 	}
 }
-
-
-
 </script>

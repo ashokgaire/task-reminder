@@ -1,6 +1,9 @@
 <template>
 <div class="container">
-<Header title="Hello"/>
+<Header @showhide-task="showHideTask" title="Hello" :showAddTask="showAddTask" />
+<div v-show="showAddTask" >
+    <AddTask @add-task="AddTask"/>
+</div>
 <Tasks @toggle-task= "toggleTask"  @delete-task="deleteTask" :tasks="tasks" />
 </div>
 
@@ -8,21 +11,32 @@
 <script>
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from "./components/AddTask"
+
 export default {
 	name: 'App',
 	components: {
 		Header,
     Tasks,
+    AddTask,
 
 	},
 
   data() {
     return {
       tasks: [],
+      showAddTask: false,
     }
   },
 
   methods: {
+
+    showHideTask()
+    {
+      
+      this.showAddTask = !this.showAddTask
+    },
+
     toggleTask(id)
     {
       this.tasks = this.tasks.map((task) => 
@@ -35,7 +49,14 @@ export default {
       {
       this.tasks = this.tasks.filter((task) => task.id !== id)
     }
-    }
+    },
+
+    AddTask(task)
+    {
+      this.tasks = [...this.tasks, task]
+
+    },
+
   },
  
 

@@ -2,7 +2,8 @@
 	<header>
         <h1> Task Tracker </h1>
 
-        <Button  text= "Add Task" color="Green" />
+        <Button @showhide-task="$emit('showhide-task')" :text= "showAddTask ? 'Close':'Add Task'"
+:color="showAddTask ? 'Red': 'Green'" />
 	</header>
 
 </template>
@@ -17,12 +18,17 @@ export  default {
 		title: {
 			type: String,
 			default: "Hello ",
+		},
+		showAddTask: {
+			type: Boolean,
+			default: false
 		}
 	},
 	components:
 	{
 		Button,
 	},
+	emits:['showhide-task'],
 }
 </script>
 
